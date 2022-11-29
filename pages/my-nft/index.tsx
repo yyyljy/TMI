@@ -5,7 +5,7 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 
 const MyNft: NextPage = () => {
-  const [nftTokenIds, setNftTokenIds] = useState<string[]>();
+  const [nftTokenIds, setNftTokenIds] = useState<any>();
 
   const { account, getAccount } = useWallet();
   const { mintContract } = useWeb3();
@@ -15,6 +15,7 @@ const MyNft: NextPage = () => {
       const response = await mintContract.methods.getTreeData(account).call();
 
       setNftTokenIds(response);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
