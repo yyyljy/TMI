@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 const MyNft: NextPage = () => {
   const [nftTokenIds, setNftTokenIds] = useState<any>();
+  const [treeData, setTreeData] = useState<any>();
 
   const { account, getAccount } = useWallet();
   const { mintContract } = useWeb3();
@@ -14,8 +15,8 @@ const MyNft: NextPage = () => {
     try {
       const response = await mintContract.methods.getTreeData(account).call();
 
-      setNftTokenIds(response);
-      console.log(response);
+      setNftTokenIds(response[Object?.keys(response)[0]]);
+      setTreeData(response[Object?.keys(response)[1]]);
     } catch (error) {
       console.error(error);
     }
@@ -31,6 +32,9 @@ const MyNft: NextPage = () => {
     getAccount();
   }, []);
 
+  useEffect(() => console.log(treeData), [treeData]);
+  useEffect(() => console.log(nftTokenIds), [nftTokenIds]);
+
   return (
     <Flex
       minH="100vh"
@@ -43,10 +47,10 @@ const MyNft: NextPage = () => {
         내 NFT
       </Text>
       <Grid templateColumns="repeat(4, 1fr)" gap={8}>
-        {nftTokenIds &&
-          nftTokenIds[Object?.keys(nftTokenIds)[1]].map((v, i) => {
-            return <NftCard key={i} treeData={v} />;
-          })}
+        {treeData?.map((v, i) => {
+          // return <NftCard key={i} treeData={v} tokenid={nftTokenIds[i]} />;
+          return <NftCard key={i} treeData={v} />;
+        })}
       </Grid>
     </Flex>
   );
