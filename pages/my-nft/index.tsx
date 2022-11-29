@@ -15,7 +15,17 @@ const MyNft: NextPage = () => {
       const response = await mintContract.methods.getTreeData(account).call();
 
       setNftTokenIds(response);
-      console.log(response);
+      const tokenIdArr = response[0];
+      const treeDataArr = response[1];
+      console.log(tokenIdArr);
+      console.log(response[1]);
+      for (let index = 0; index < treeDataArr.length; index++) {
+        treeDataArr[index] = {
+          ...treeDataArr[index],
+          tokenId: tokenIdArr[index],
+        };
+      }
+      console.log(treeDataArr);
     } catch (error) {
       console.error(error);
     }
