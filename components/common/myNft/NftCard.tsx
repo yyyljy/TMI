@@ -46,6 +46,17 @@ const NftCard: FC<NftCardProps> = ({ treeData }) => {
     }
   };
 
+  const bearBerry = async () => {
+    try {
+      // const response
+      // const response = await berryContract.methods.bearBerry(tokenId).call();
+
+      // setBerry(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getMetadata();
   }, []);

@@ -1,5 +1,5 @@
-export const MINT_NFT_CONTRACT = "0x742F984393D35C627e4b510C15F81892Bb79CF33";
-export const BERRY_NFT_CONTRACT = "0xB23639CC849b45A404f10A2D94D734970336059b";
+export const MINT_NFT_CONTRACT = "0xe5122f69fC1c86E8E330c39F4c24a35F49444a83";
+export const BERRY_NFT_CONTRACT = "0x6Efb900A035780DDdF9d1b76A707F7D378C9E59d";
 export const MINT_NFT_ABI = [
   {
     inputs: [
@@ -215,6 +215,11 @@ export const MINT_NFT_ABI = [
     ],
     name: "getTreeData",
     outputs: [
+      {
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]",
+      },
       {
         components: [
           {
