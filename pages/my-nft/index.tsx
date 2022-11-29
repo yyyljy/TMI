@@ -5,7 +5,11 @@ import { NextPage } from "next";
 import { useState, useEffect } from "react";
 
 const MyNft: NextPage = () => {
+  const { berryContract } = useWeb3();
+
   const [nftTokenIds, setNftTokenIds] = useState<any>();
+  const [treeData, setTreeData] = useState<any>();
+  const [berry, setBerry] = useState();
 
   const { account, getAccount } = useWallet();
   const { mintContract } = useWeb3();
@@ -14,11 +18,8 @@ const MyNft: NextPage = () => {
     try {
       const response = await mintContract.methods.getTreeData(account).call();
 
-      setNftTokenIds(response);
-      const tokenIdArr = response[0];
-      const treeDataArr = response[1];
-
-      console.log(treeDataArr);
+      setNftTokenIds(response[Object?.keys(response)[0]]);
+      setTreeData(response[Object?.keys(response)[1]]);
     } catch (error) {
       console.error(error);
     }
@@ -34,6 +35,25 @@ const MyNft: NextPage = () => {
     getAccount();
   }, []);
 
+  useEffect(() => console.log(treeData), [treeData]);
+  useEffect(() => console.log(nftTokenIds), [nftTokenIds]);
+
+  const getBerryBalance = async () => {
+    try {
+      const response = await berryContract.methods.balanceOf(account).call();
+
+      setBerry(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!account || !berryContract) return;
+
+    getBerryBalance();
+  }, [account, berryContract]);
+
   return (
     <Flex
       minH="100vh"
@@ -45,11 +65,12 @@ const MyNft: NextPage = () => {
       <Text mb={8} fontSize={"4xl"}>
         내 NFT
       </Text>
+
       <Grid templateColumns="repeat(4, 1fr)" gap={8}>
-        {nftTokenIds &&
-          nftTokenIds[Object?.keys(nftTokenIds)[1]].map((v, i) => {
-            return <NftCard key={i} treeData={v} />;
-          })}
+        {treeData?.map((v, i) => {
+          return <NftCard key={i} treeData={v} tokenId={nftTokenIds[i]} />;
+          // return <NftCard key={i} treeData={v} />;
+        })}
       </Grid>
     </Flex>
   );

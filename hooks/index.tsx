@@ -3,6 +3,7 @@ import Web3 from "web3";
 import {
   MINT_NFT_ABI,
   MINT_NFT_CONTRACT,
+  BERRY_NFT_ABI,
   BERRY_NFT_CONTRACT,
 } from "../web3.config";
 
@@ -41,7 +42,7 @@ export const useWeb3 = () => {
   useEffect(() => {
     if (!web3) return;
     setMintContract(new web3.eth.Contract(MINT_NFT_ABI, MINT_NFT_CONTRACT));
-    setBerryContract(new web3.eth.Contract(MINT_NFT_ABI, BERRY_NFT_CONTRACT));
+    setBerryContract(new web3.eth.Contract(BERRY_NFT_ABI, BERRY_NFT_CONTRACT));
   }, [web3]);
 
   return { web3, mintContract, berryContract };

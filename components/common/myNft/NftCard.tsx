@@ -6,6 +6,7 @@ import { FC, useEffect, useState } from "react";
 
 interface NftCardProps {
   treeData: any;
+  tokenId: any;
 }
 
 export interface IMetadata {
@@ -18,9 +19,9 @@ export interface IMetadata {
   }[];
 }
 
-const NftCard: FC<NftCardProps> = ({ treeData }) => {
+const NftCard: FC<NftCardProps> = ({ treeData, tokenId }) => {
   const [metadata, setMetadata] = useState<IMetadata>();
-  const { berryContract } = useWeb3();
+  const { mintContract, berryContract } = useWeb3();
   const { account, getAccount } = useWallet();
   const [berry, setBerry] = useState();
 
@@ -36,22 +37,26 @@ const NftCard: FC<NftCardProps> = ({ treeData }) => {
     }
   };
 
-  const getBerryBalance = async () => {
+  const bearBerry = async () => {
     try {
-      const response = await berryContract.methods.balanceOf(account).call();
-
-      setBerry(response);
+      const response = await berryContract.methods
+        .bearBerry(tokenId)
+        .send({ from: account });
+      // setBerry(response);
+      console.log(response);
+      if (response.status) {
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const bearBerry = async () => {
+  const levelUp = async () => {
     try {
-      // const response
-      // const response = await berryContract.methods.bearBerry(tokenId).call();
-
-      // setBerry(response);
+      const response = await mintContract.methods
+        .levelUp(tokenId)
+        .send({ from: account });
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -60,12 +65,6 @@ const NftCard: FC<NftCardProps> = ({ treeData }) => {
   useEffect(() => {
     getMetadata();
   }, []);
-
-  useEffect(() => {
-    if (!account || !berryContract) return;
-
-    getBerryBalance();
-  }, [account, berryContract]);
 
   useEffect(() => {
     getAccount();
@@ -79,26 +78,21 @@ const NftCard: FC<NftCardProps> = ({ treeData }) => {
         fallbackSrc="images/loading.png"
         rounded="2xl"
       />
+      <Text my={4}>NFT ID : {tokenId}</Text>
       <Text mt={2} fontSize="2xl" fontWeight="bold">
         {metadata?.name}
       </Text>
       <Text>{metadata?.description}</Text>
       <Link
         href={`my-nft/detail/${treeData.shape}/${treeData.color}/${treeData.level}`}
-      >
-        <Text my={4}>보유 열매 수 : {berry}</Text>
-      </Link>
+      ></Link>
       <Flex justifyContent={"space-evenly"}>
-        <Link
-          href={`my-nft/detail/${treeData.shape}/${treeData.color}/${treeData.level}`}
-        >
-          <Button my={4}>수확</Button>
-        </Link>
-        <Link
-          href={`my-nft/detail/${treeData.shape}/${treeData.color}/${treeData.level}`}
-        >
-          <Button my={4}>LvL UP</Button>
-        </Link>
+        <Button onClick={bearBerry} my={4}>
+          수확
+        </Button>
+        <Button onClick={levelUp} my={4}>
+          LvL UP
+        </Button>
       </Flex>
     </Box>
   );
