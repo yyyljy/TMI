@@ -34,7 +34,6 @@ const Header: FC = () => {
       pos={"fixed"}
       w={"full"}
       top={0}
-      bgColor="gray.100"
       px={8}
       py={2}
       shadow={"md"}
@@ -43,8 +42,12 @@ const Header: FC = () => {
     >
       <Box display={"flex"} alignSelf={"center"}>
         <Link href={"/"}>
-          <Text fontSize={"lg"} fontWeight={"bold"}>
-            PROJECT TMI TREE
+          <Text
+            fontSize={"lg"}
+            fontWeight={"bold"}
+            style={{ fontFamily: "bitbit" }}
+          >
+            TMI
           </Text>
         </Link>
       </Box>
