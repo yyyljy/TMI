@@ -53,9 +53,10 @@ const MyNft: NextPage = () => {
         내 NFT
       </Text>
       <Grid templateColumns="repeat(4, 1fr)" gap={8}>
-        {nftTokenIds?.map((v, i) => {
-          return <NftCard key={i} treeData={v} />;
-        })}
+        {nftTokenIds &&
+          nftTokenIds[Object?.keys(nftTokenIds)[1]].map((v, i) => {
+            return <NftCard key={i} treeData={v} />;
+          })}
       </Grid>
     </Flex>
   );
