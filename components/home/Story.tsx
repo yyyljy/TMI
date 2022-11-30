@@ -8,17 +8,17 @@ const height = 512;
 // PLN image - public/images 교체, contents - 세계관에 관한 내용 추가
 const StoryContents = [
   {
-    image: "images/story1.png",
-    contents: "환경을 살리는 착한 행동을 해주세요",
+    image: "images/story1.jpg",
+    contents: "친환경 활동을 하나씩 실천해나갈 때마다",
   },
   {
-    image: "images/story2.png",
-    contents: "TMI가 보상으로 드리는 다양한 종류의 나무를 심고",
+    image: "images/2.png",
+    contents: "TMI의 형형색색 나무 NFT를 구매할 수 있는 권리를 갖고",
   },
   {
-    image: "images/story3.png",
-    contents: "열매를 수확해서 나무를 키우세요.",
-  },
+    image: "images/3.png",
+    contents: "탐스러운 열매를 수확하며 나무를 키워보세요."
+  }
 ];
 
 const Story: FC = () => {

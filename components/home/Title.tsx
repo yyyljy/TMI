@@ -15,7 +15,7 @@ const Title: FC = () => {
       <Box></Box>
       <Box>
         {/* PLN 타이틀 이미지 교체  */}
-        <Image src="images/title.png" alt="Title" />
+        <Image  src="images/this.png" width="1500"  height="500" alt="Title" />
       </Box>
       <ScrollLink to="story" spy={true} smooth={true}>
         <Button

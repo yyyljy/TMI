@@ -6,17 +6,17 @@ import TeamCard, { TeamCardProps } from "./TeamCard";
 const teamCardContents: TeamCardProps[] = [
   {
     name: "이정윤",
-    position: "팀장, 프로그래머",
+    position: "프로그래머",
     image: "images/team1.png",
   },
   {
     name: "임형준",
-    position: "디자이너, 프로그래머",
+    position: "디자이너",
     image: "images/team2.png",
   },
   {
     name: "이유경",
-    position: "기획, 프로그래머",
+    position: "기획",
     image: "images/team3.png",
   },
 ];
