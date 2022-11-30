@@ -24,7 +24,7 @@ const teamCardContents: TeamCardProps[] = [
 const Team: FC = () => {
   return (
     <Flex
-      id="roadmap"
+      id="team"
       minH="100vh"
       justifyContent="center"
       alignItems="center"
