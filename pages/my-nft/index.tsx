@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 const MyNft: NextPage = () => {
   const { berryContract } = useWeb3();
 
-  const [nftTokenIds, setNftTokenIds] = useState<any>();
-  const [treeData, setTreeData] = useState<any>();
+  const [nftTokenIds, setNftTokenIds] = useState<any[]>();
+  const [treeData, setTreeData] = useState<any[]>();
   const [berry, setBerry] = useState();
 
   const { account, getAccount } = useWallet();
@@ -67,10 +67,11 @@ const MyNft: NextPage = () => {
       </Text>
 
       <Grid templateColumns="repeat(4, 1fr)" gap={8}>
-        {treeData?.map((v, i) => {
-          return <NftCard key={i} treeData={v} tokenId={nftTokenIds[i]} />;
-          // return <NftCard key={i} treeData={v} />;
-        })}
+        {nftTokenIds &&
+          treeData?.map((v, i) => {
+            return <NftCard key={i} treeData={v} tokenId={nftTokenIds[i]} />;
+            // return <NftCard key={i} treeData={v} />;
+          })}
       </Grid>
     </Flex>
   );
